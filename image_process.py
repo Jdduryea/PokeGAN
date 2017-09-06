@@ -3,15 +3,16 @@ from PIL import Image
 import numpy as np
 import os, sys
 
-def process(dirs, path):
+def process(dirs, path, gen_name):
     """
     Takes all the png images in the chosen directories, resizes them to 64 x 64 
     and converts the images to RGB
     """
+    final_images_path = "C:\Users\smahe\Desktop\PokeGAN\Images\Final_Images\\"
     for image_file in dirs:
         if os.path.isfile(path + image_file):
             im = Image.open(path+image_file)
-            f, e = os.path.splitext(path + image_file) 
+            f, e = os.path.splitext(image_file) 
 
             #Convert to RGBA to use as a mask 
             rgba_im = im.convert('RGBA')
@@ -26,7 +27,7 @@ def process(dirs, path):
             imResize = whitened.resize((64,64), Image.ANTIALIAS)
 
 
-            imResize.save(f + "_resized.png", 'PNG', quality=90)
+            imResize.save(final_images_path + f + gen_name + "_resized.png", 'PNG', quality=90)
 
 #Example Path "C:\Users\user\PokeGAN\Images\Generation 5\\black-white\\"
 
@@ -37,8 +38,9 @@ def delete(dirs,path):
 
 
 path = ""
+gen_name = "_hgss_"
 directories = os.listdir( path )
 
-process(directories, path)
+process(directories, path, gen_name)
 
 #delete(directories, path)
