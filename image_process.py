@@ -8,7 +8,7 @@ def process(dirs, path, gen_name):
     Takes all the png images in the chosen directories, resizes them to 64 x 64 
     and converts the images to RGB
     """
-    final_images_path = "C:\Users\smahe\Desktop\PokeGAN\Images\Final_Images\\"
+    final_images_path = "\Desktop\PokeGAN\Images\Gen 5 Processed\\"
     for image_file in dirs:
         if os.path.isfile(path + image_file):
             im = Image.open(path+image_file)
@@ -24,7 +24,7 @@ def process(dirs, path, gen_name):
             whitened.paste(rgba_im, mask=rgba_im) 
 
             #Resize image
-            imResize = whitened.resize((64,64), Image.ANTIALIAS)
+            imResize = whitened.resize((96,96), Image.ANTIALIAS)
 
 
             imResize.save(final_images_path + f + gen_name + "_resized.png", 'PNG', quality=90)
@@ -38,7 +38,7 @@ def delete(dirs,path):
 
 
 path = ""
-gen_name = "_hgss_"
+gen_name = "_bw_"
 directories = os.listdir( path )
 
 process(directories, path, gen_name)
